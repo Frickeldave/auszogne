@@ -1,6 +1,6 @@
 ASZ_SOURCEFOLDER=$(dirname "$(readlink -f "$0")")
 ASZ_BASEFOLDER=/mnt/c/temp
-ASZ_GIMPFILE=${ASZ_SOURCEFOLDER}/frickeldave.xcf
+ASZ_GIMPFILE=${ASZ_SOURCEFOLDER}/msg_v01.xcf
 ASZ_DEBUG="false"
 ASZ_WORKDIR="EMPTY"
 ASZ_EXPORTCOUNT=0
@@ -104,7 +104,8 @@ function checkPrereqs() {
     
     if [ ! -d "${ASZ_BASEFOLDER}" ]; then printError "Failed to find basefolder \"${ASZ_BASEFOLDER}\"."; exit 1; fi
     if [ ! -f "${ASZ_GIMPFILE}" ]; then printError "Failed to find source GIMP file \"${ASZ_GIMPFILE}\"."; exit 1; fi
-
+    if ! command -v xcfinfo &> /dev/null; then printError "Please install \"xcfinfo\" (probably part of package xcftools) to run programm"; exit 1; fi
+    if ! command -v convert &> /dev/null; then printError "Please install \"convert\" (probably part of package imagemagick) to run programm"; exit 1; fi
 }
 
 function createWorkdir() {
